@@ -36,7 +36,7 @@ describe("EmailInput functional component", () => {
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
     });
-    it("should throw error when value is missing", async () => {
+    it("should throw error when `name` is missing", async () => {
       console.error = jest.fn();
       const wrapper = mount(<EmailInput value="" onSetValue={jest.fn()} />);
 
