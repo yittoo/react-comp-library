@@ -62,9 +62,9 @@ export const EmailInput = props => {
    */
   const isValidEmail = (currentValue, { minLength, maxLength }) => {
     if (!currentValue) return false;
-    if (minLength && !isNaN(minLength) && currentValue.length < minLength)
+    if (minLength && !isNaN(minLength) && currentValue.length <= minLength)
       return false;
-    if (maxLength && !isNaN(maxLength) && currentValue.length > maxLength)
+    if (maxLength && !isNaN(maxLength) && currentValue.length >= maxLength)
       return false;
     // split identifier and domain+extention
     const initialSplit = currentValue.split("@");
