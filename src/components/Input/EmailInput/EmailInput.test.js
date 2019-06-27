@@ -39,7 +39,6 @@ describe("EmailInput functional component", () => {
     it("should throw error when `name` is missing", async () => {
       console.error = jest.fn();
       const wrapper = mount(<EmailInput value="" onSetValue={jest.fn()} />);
-
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
     });
@@ -49,17 +48,17 @@ describe("EmailInput functional component", () => {
    * Necessary props: `value`, `onSetValue`, `name`
    */
   describe("if there are necessary props", () => {
-    let wrapper, component;
-
-    beforeEach(() => {
-      wrapper = setup({}, EmailInput);
-      component = findByTestAttr(wrapper, "component-EmailInput");
-    });
-
     it("should render without crashing", () => {
+      const wrapper = setup({}, EmailInput);
+      const component = findByTestAttr(wrapper, "component-EmailInput");
       expect(component.length).toBe(1);
     });
     describe("if entered mail is invalid", () => {
+      let wrapper, component;
+      beforeEach(() => {
+        wrapper = setup({}, EmailInput);
+        component = findByTestAttr(wrapper, "component-EmailInput");
+      });
       it("should call `onSetValue` prop function", () => {
         const event = { target: { value: "qwerty" } };
         component.simulate("change", event);
@@ -74,24 +73,44 @@ describe("EmailInput functional component", () => {
         const event = { target: { value: "" } };
         component.simulate("change", event);
         expect(wrapper.exists(".Input--invalid")).toBe(true);
-      })
+      });
     });
-  });
 
-  describe("if entered email is valid", () => {
-    let wrapper, component;
-    const editedProps = { value: "asd@qwe.com.en", isValid: true };
-    beforeEach(() => {
-      wrapper = setup(editedProps, EmailInput);
-      component = findByTestAttr(wrapper, "component-EmailInput");
+    describe("if there are `minLength` or `maxLength` props and email appears valid except those rules", () => {
+      let wrapper, component;
+      const editedProps = {
+        minLength: 6,
+        maxLength: 30
+      };
+      beforeEach(() => {
+        wrapper = setup(editedProps, EmailInput);
+        component = findByTestAttr(wrapper, "component-EmailInput");
+      });
+      it("should have `Input--invalid` class if it does not match `minLength`", () => {
+        component.simulate("change", { target: { value: "a@a.c" } });
+        expect(wrapper.exists(".Input--invalid")).toBe(true);
+      });
+      it("should have `Input--invalid` class if it does not match `maxLength`", () => {
+        component.simulate("change", { target: { value: "adsadawe_43_ewqqcdsfqwes@adsaedsafvsfsd.com.en" } });
+        expect(wrapper.exists(".Input--invalid")).toBe(true);
+      });
     });
-    it("input `value` should be equal to `prop.value` and isValid true", () => {
-      expect(component.props().value).toBe("asd@qwe.com.en");
-      expect(wrapper.props().isValid).toBe(true);
-    });
-    it("should have `Input--valid` class", () => {
-      component.simulate("change", { target: { value: "asd@qwe.com.en" } });
-      expect(wrapper.exists(".Input--valid")).toBe(true)
+
+    describe("if entered email is valid", () => {
+      let wrapper, component;
+      const editedProps = { value: "asd@qwe.com.en", isValid: true, minLength: 6 };
+      beforeEach(() => {
+        wrapper = setup(editedProps, EmailInput);
+        component = findByTestAttr(wrapper, "component-EmailInput");
+      });
+      it("input `value` should be equal to `prop.value` and isValid true", () => {
+        expect(component.props().value).toBe("asd@qwe.com.en");
+        expect(wrapper.props().isValid).toBe(true);
+      });
+      it("should have `Input--valid` class", () => {
+        component.simulate("change", { target: { value: "asd@qwe.com.en" } });
+        expect(wrapper.exists(".Input--valid")).toBe(true);
+      });
     });
   });
 });

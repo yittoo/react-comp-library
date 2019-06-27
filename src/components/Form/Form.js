@@ -55,6 +55,8 @@ class Form extends Component {
               value={fieldData.value}
               isValid={fieldData.isValid}
               required={rules.required}
+              minLength={rules.minLength}
+              maxLength={rules.maxLength}
               onSetValue={payload => this.onChangedHandler(payload, name)}
               name={name}
               key={name}

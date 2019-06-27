@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import classes from "../Input.module.scss";
 
 /**
@@ -35,7 +35,10 @@ export const EmailInput = props => {
    */
   const onChangeHandler = event => {
     const { value } = event.target;
-    const isValid = isValidEmail(value);
+    const isValid = isValidEmail(value, {
+      minLength: props.minLength,
+      maxLength: props.maxLength
+    });
     props.onSetValue({ value, isValid });
     classesHandler(isValid);
   };
@@ -57,8 +60,12 @@ export const EmailInput = props => {
    * @param {String} currentValue current email input value
    * @returns {Boolean} - whether it's a valid email or not
    */
-  const isValidEmail = currentValue => {
+  const isValidEmail = (currentValue, { minLength, maxLength }) => {
     if (!currentValue) return false;
+    if (minLength && !isNaN(minLength) && currentValue.length < minLength)
+      return false;
+    if (maxLength && !isNaN(maxLength) && currentValue.length > maxLength)
+      return false;
     // split identifier and domain+extention
     const initialSplit = currentValue.split("@");
     // make sure there is only one `@`
