@@ -8,3 +8,4 @@ const Input = () => {
 export default Input;
 
 export { EmailInput } from "./EmailInput/EmailInput";
+export { PhoneInput } from "./PhoneInput/PhoneInput";

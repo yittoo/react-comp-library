@@ -3,7 +3,8 @@ import classes from "../Input.module.scss";
 
 /**
  * @param {Object} props
- * must have `value`, `onSetValue`, `name` props
+ * must have `String`: `value`, `Function`: `onSetValue`, `String`: `name` props
+ * can have `Boolean`: `required`, `Number`: `minLength`, `Number`: `maxLength`, `String`: `placeholder` props
  */
 export const EmailInput = props => {
   const [inputClasses, setClasses] = useState([classes.Input]);
@@ -32,6 +33,7 @@ export const EmailInput = props => {
   /**
    * Does necessary calculations upon onChange event on input
    * @param {Object} event from onChange event of input
+   * @returns {void} - does 2 function calls, 1 on `onSetValue` function prop another on `classesHandler`
    */
   const onChangeHandler = event => {
     const { value } = event.target;
@@ -46,6 +48,7 @@ export const EmailInput = props => {
   /**
    * Assigns class to input field accordingly
    * @param {Boolean} isValid if input field is valid or not
+   * @returns {void} does function call on `setClasses` hook setState function
    */
   const classesHandler = isValid => {
     if (!isValid) {
@@ -62,9 +65,9 @@ export const EmailInput = props => {
    */
   const isValidEmail = (currentValue, { minLength, maxLength }) => {
     if (!currentValue) return false;
-    if (minLength && !isNaN(minLength) && currentValue.length <= minLength)
+    if (minLength && !isNaN(minLength) && currentValue.length < minLength)
       return false;
-    if (maxLength && !isNaN(maxLength) && currentValue.length >= maxLength)
+    if (maxLength && !isNaN(maxLength) && currentValue.length > maxLength)
       return false;
     // split identifier and domain+extention
     const initialSplit = currentValue.split("@");
@@ -89,6 +92,7 @@ export const EmailInput = props => {
       data-test="component-EmailInput"
       name={props.name}
       required={props.required}
+      placeholder={props.placeholder}
     />
   );
 };

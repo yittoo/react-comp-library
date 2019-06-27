@@ -24,20 +24,20 @@ const setup = (props = {}, Component) => {
 
 describe("EmailInput functional component", () => {
   describe("if there are missing necessary props", () => {
-    it("should throw error when `value` is missing", async () => {
+    beforeEach(() => {
       console.error = jest.fn();
+    })
+    it("should throw error when `value` is missing", async () => {
       const wrapper = mount(<EmailInput />);
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
     });
     it("should throw error when `onSetValue` is missing", async () => {
-      console.error = jest.fn();
       const wrapper = mount(<EmailInput value="" />);
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
     });
     it("should throw error when `name` is missing", async () => {
-      console.error = jest.fn();
       const wrapper = mount(<EmailInput value="" onSetValue={jest.fn()} />);
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
