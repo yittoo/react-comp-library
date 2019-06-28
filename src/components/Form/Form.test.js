@@ -74,6 +74,21 @@ describe("Input functional component", () => {
       const PhoneInput = findByTestAttr(wrapper, "phone-input");
       expect(PhoneInput.length).toBe(1);
     });
+    it("should render url input if state has it", () => {
+      const state = {
+        url: {
+          value: "",
+          isValid: false,
+          type: "url",
+          rules: {
+            required: true
+          }
+        }
+      };
+      wrapper.setState(state);
+      const UrlInput = findByTestAttr(wrapper, "url-input");
+      expect(UrlInput.length).toBe(1);
+    });
     it("should render nothing if state has invalid type input", () => {
       const state = {
         somethingRandom: {

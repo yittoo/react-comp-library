@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import classes from "../Input.module.scss";
 
+import { classesHandler } from "../util/util";
+
 /**
  * @param {Object} props
  * must have `value`, `onSetValue`, `name` props
@@ -42,21 +44,21 @@ export const PhoneInput = props => {
       maxLength: props.maxLength
     });
     props.onSetValue({ value, isValid });
-    classesHandler(isValid);
+    classesHandler(isValid, classes, setClasses);
   };
 
-  /**
-   * Assigns class to input field accordingly
-   * @param {Boolean} isValid if input field is valid or not
-   * @returns {void} does function call on `setClasses` hook setState function
-   */
-  const classesHandler = isValid => {
-    if (!isValid) {
-      setClasses([classes.Input, classes["Input--invalid"]]);
-    } else {
-      setClasses([classes.Input, classes["Input--valid"]]);
-    }
-  };
+  // /**
+  //  * Assigns class to input field accordingly
+  //  * @param {Boolean} isValid if input field is valid or not
+  //  * @returns {void} does function call on `setClasses` hook setState function
+  //  */
+  // const classesHandler = isValid => {
+  //   if (!isValid) {
+  //     setClasses([classes.Input, classes["Input--invalid"]]);
+  //   } else {
+  //     setClasses([classes.Input, classes["Input--valid"]]);
+  //   }
+  // };
 
   /**
    * Checks whether input email is valid or not

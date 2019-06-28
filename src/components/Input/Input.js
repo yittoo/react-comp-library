@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Input.module.scss";
 
 const Input = () => {
@@ -9,3 +9,4 @@ export default Input;
 
 export { EmailInput } from "./EmailInput/EmailInput";
 export { PhoneInput } from "./PhoneInput/PhoneInput";
+export { UrlInput } from "./UrlInput/UrlInput";

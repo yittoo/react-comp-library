@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { EmailInput, PhoneInput } from "../Input/Input";
+import { EmailInput, PhoneInput, UrlInput } from "../Input/Input";
 import axios from "axios";
 
 class Form extends Component {
@@ -22,6 +22,15 @@ class Form extends Component {
         isValid: false,
         type: "phone",
         placeholder: "Phone Number",
+        rules: {
+          required: true
+        }
+      },
+      url: {
+        value: "",
+        isValid: false,
+        type: "url",
+        placeholder: "Website",
         rules: {
           required: true
         }
@@ -86,6 +95,14 @@ class Form extends Component {
               minLength={rules.minLength || 10}
               maxLength={rules.maxLength || 10}
               data-test="phone-input"
+            />
+          );
+        case "url":
+          return (
+            <UrlInput
+              {...defaultProps}
+              maxLength={null}
+              data-test="url-input"
             />
           );
         default:
