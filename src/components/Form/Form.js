@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { EmailInput, PhoneInput } from "../Input/Input";
+import axios from "axios";
 
 class Form extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Form extends Component {
         value: "",
         isValid: false,
         type: "email",
+        placeholder: "E-mail address",
         rules: {
           required: true,
           minLength: 6,
@@ -19,6 +21,7 @@ class Form extends Component {
         value: "",
         isValid: false,
         type: "phone",
+        placeholder: "Phone Number",
         rules: {
           required: true
         }
@@ -26,13 +29,19 @@ class Form extends Component {
     };
   }
 
-  onSubmitHandler = event => {
+  /**
+   * AJAX post request with current state of form to given url
+   * @param {Object} event - event data generated from form itself
+   * @param {Object} currentState - current state of form
+   * @returns {void} - does a post request to given url
+   */
+  onSubmitHandler = (event, currentState, url) => {
     event.preventDefault();
     const formData = new FormData();
-    for (let name in this.state) {
-      formData.append(name, this.state[name].value);
+    for (let name in currentState) {
+      formData.append(name, currentState[name].value);
     }
-    // axios.post(url, formData)
+    axios.post(url, formData);
   };
 
   /**
@@ -59,6 +68,7 @@ class Form extends Component {
       const defaultProps = {
         value: fieldData.value,
         isValid: fieldData.isValid,
+        placeholder: fieldData.placeholder,
         required: rules.required,
         minLength: rules.minLength,
         maxLength: rules.maxLength,
@@ -68,13 +78,14 @@ class Form extends Component {
       };
       switch (currentState[name].type) {
         case "email":
-          return <EmailInput {...defaultProps} />;
+          return <EmailInput {...defaultProps} data-test="email-input" />;
         case "phone":
           return (
             <PhoneInput
               {...defaultProps}
               minLength={rules.minLength || 10}
               maxLength={rules.maxLength || 10}
+              data-test="phone-input"
             />
           );
         default:
@@ -85,7 +96,16 @@ class Form extends Component {
 
   render() {
     const InputsToRender = this.manageInputsToRender(this.state);
-    return <form onSubmit={this.onSubmitHandler}>{InputsToRender}</form>;
+    return (
+      <form
+        onSubmit={event =>
+          this.onSubmitHandler(event, this.state, "someurl.com")
+        }
+        data-test="component-Form"
+      >
+        {InputsToRender}
+      </form>
+    );
   }
 }
 
