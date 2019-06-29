@@ -47,19 +47,6 @@ export const EmailInput = props => {
     classesHandler(isValid, classes, setClasses);
   };
 
-  // /**
-  //  * Assigns class to input field accordingly
-  //  * @param {Boolean} isValid if input field is valid or not
-  //  * @returns {void} does function call on `setClasses` hook setState function
-  //  */
-  // const classesHandler = isValid => {
-  //   if (!isValid) {
-  //     setClasses([classes.Input, classes["Input--invalid"]]);
-  //   } else {
-  //     setClasses([classes.Input, classes["Input--valid"]]);
-  //   }
-  // };
-
   /**
    * Checks whether input email is valid or not
    * @param {String} currentValue current email input value
