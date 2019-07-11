@@ -31,16 +31,19 @@ describe("PhoneInput functional component", () => {
       const wrapper = mount(<PhoneInput />);
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
+      wrapper.unmount();
     });
     it("should throw error when `onSetValue` is missing", async () => {
       const wrapper = mount(<PhoneInput value="" />);
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
+      wrapper.unmount();
     });
     it("should throw error when `name` is missing", async () => {
       const wrapper = mount(<PhoneInput value="" onSetValue={jest.fn()} />);
       expect(console.error).toHaveBeenCalled();
       expect(wrapper).toEqual({});
+      wrapper.unmount();
     });
   });
 
@@ -52,6 +55,7 @@ describe("PhoneInput functional component", () => {
       const wrapper = setup({}, PhoneInput);
       const component = findByTestAttr(wrapper, "component-PhoneInput");
       expect(component.length).toBe(1);
+      wrapper.unmount();
     });
     describe("if entered phone is invalid", () => {
       let wrapper, component;
@@ -59,6 +63,9 @@ describe("PhoneInput functional component", () => {
         wrapper = setup({}, PhoneInput);
         component = findByTestAttr(wrapper, "component-PhoneInput");
       });
+      afterEach(() => {
+        wrapper.unmount();
+      })
       it("should call `onSetValue` prop function", () => {
         const event = { target: { value: "433424dsa" } };
         component.simulate("change", event);
@@ -86,6 +93,9 @@ describe("PhoneInput functional component", () => {
         wrapper = setup(editedProps, PhoneInput);
         component = findByTestAttr(wrapper, "component-PhoneInput");
       });
+      afterEach(() => {
+        wrapper.unmount();
+      })
       it("should have `Input--invalid` class if it does not match `minLength`", () => {
         component.simulate("change", { target: { value: "532423" } });
         expect(wrapper.exists(".Input--invalid")).toBe(true);
@@ -103,6 +113,9 @@ describe("PhoneInput functional component", () => {
         wrapper = setup(editedProps, PhoneInput);
         component = findByTestAttr(wrapper, "component-PhoneInput");
       });
+      afterEach(() => {
+        wrapper.unmount();
+      })
       it("input `value` should be equal to `prop.value` and isValid true", () => {
         expect(component.props().value).toBe("4392104835");
         expect(wrapper.props().isValid).toBe(true);

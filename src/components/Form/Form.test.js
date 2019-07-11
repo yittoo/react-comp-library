@@ -126,6 +126,9 @@ describe("Input functional component", () => {
       wrapper = mount(<Form {...defaultProps} />);
       wrapper.setState(state);
     });
+    afterEach(() => {
+      wrapper.unmount();
+    })
     it("should be called once there is change event on input", () => {
       const spy = jest.spyOn(wrapper.instance(), "onChangedHandler");
       /**
@@ -175,7 +178,9 @@ describe("Input functional component", () => {
       wrapper = mount(<Form {...defaultProps} />);
       wrapper.setState(state);
     });
-
+    afterEach(() => {
+      wrapper.unmount();
+    })
     it("should call preventDefault, generate `formData` and make post request with it", () => {
       const expectedFormData = new FormData();
       const url = "mockurl";

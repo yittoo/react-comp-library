@@ -20,4 +20,5 @@ it('should render', () => {
   const wrapper = setup(null, Input);
   const component = findByTestAttr(wrapper, "component-Input");
   expect(component.length).toBe(1)
+  wrapper.unmount();
 })
