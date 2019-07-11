@@ -1,0 +1,9 @@
+.primary-header {
+  font-weight: 100;
+  font-size: 3rem;
+  text-align: center;
+  color: rgba(var(--color-white), 1);
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(var(--color-dark-gray), 1),
+               0 0 1rem rgba(var(--color-dark-gray), 0.5);
+}

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { EmailInput, PhoneInput, UrlInput } from "../Input/Input";
 import axios from "axios";
+
+import classes from "./Form.module.scss"
+import { EmailInput, PhoneInput, UrlInput } from "../Input/Input";
 
 class Form extends Component {
   constructor(props) {
@@ -119,6 +121,7 @@ class Form extends Component {
           this.onSubmitHandler(event, this.state, "someurl.com")
         }
         data-test="component-Form"
+        className={classes.Form}
       >
         {InputsToRender}
       </form>

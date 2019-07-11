@@ -1,25 +1,35 @@
 .Input {
   border: none;
-  border: 1px solid rgba($color: #000000, $alpha: 0.2);
-  color: #333;
+  border: 1px solid rgba(var(--color-secondary), 1);
+  color: rgba(var(--color-dark-gray), 1);
   border-radius: 3px;
   display: block;
   width: 40rem;
   padding: 1rem 2rem;
   outline: none;
+
+  &:not(:last-child){
+    margin-bottom: 1rem;
+  }
+
+  // &:placeholder-shown{
+
+  // }
+
   &--invalid {
-    border-color: rgba($color: #aaaa00, $alpha: 0.5);
-    background-color: rgba(#ff0000, .1);
+    border-color: rgba(var(--color-invalid), 1);
+    background-color: rgba(var(--color-invalid-light), 1);
     &:focus {
-      background-color: #fff;
+      border-color: rgba(var(--color-warning), 1);
+      background-color: rgba(var(--color-warning-light), 1);
     }
   }
 
   &--valid {
-    border-color: rgba($color: #00ff00, $alpha: 0.2);
-    background-color: rgba(#00ff00, .05);
+    border-color: rgba(var(--color-valid), 1);
+    background-color: rgba(var(--color-valid-light), 1);
     &:focus {
-      background-color: rgba(#00ff00, .02);
+      background-color: rgba(var(--color-valid-light), 1);
     }
   }
 }

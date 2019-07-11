@@ -1,0 +1,17 @@
+:root {
+  --color-valid: 0, 156, 0;
+  --color-valid-light: 219, 255, 219;
+  --color-warning: 255, 193, 7;
+  --color-warning-light: 255, 236, 180;
+  --color-invalid: 245, 163, 163;
+  --color-invalid-light: 253, 240, 240;
+
+  --color-dark-gray: 50, 50, 50;
+
+  --color-primary: 73, 167, 236;
+  --color-secondary: 197, 108, 240;
+
+  --color-white: 255, 255, 255;
+
+  --box-shadow-light: 0 0 2rem rgba(var(--color-dark-gray), 0.2);
+}

@@ -1,0 +1,22 @@
+.Form {
+  padding: 2rem;
+  border-radius: 3px;
+  border: 1px solid rgba($color: #000000, $alpha: 0.2);
+  background-color: rgba(var(--color-white), 1);
+  box-shadow: var(--box-shadow-light);
+
+  &--invalid {
+    border-color: rgba($color: #aaaa00, $alpha: 0.5);
+    background-color: rgba(#ff0000, .1);
+    &:focus {
+      background-color: #fff;
+    }
+  }
+  &--valid {
+    border-color: rgba($color: #00ff00, $alpha: 0.2);
+    background-color: rgba(#00ff00, .05);
+    &:focus {
+      background-color: rgba(#00ff00, .02);
+    }
+  }
+}
